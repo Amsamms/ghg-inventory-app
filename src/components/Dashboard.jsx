@@ -30,10 +30,28 @@ export default function Dashboard() {
     }
   }
 
-  const handleDownload = () => {
+  const handleDownloadExcel = () => {
     const link = document.createElement('a')
     link.href = `${basePath}data/MIDOR_activities_final_complete.xlsx`
     link.download = 'MIDOR_activities_final_complete.xlsx'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const handleDownloadPDF = () => {
+    const link = document.createElement('a')
+    link.href = `${basePath}reports/MIDOR Refinery GHG Inventory 2024 group 5.pdf`
+    link.download = 'MIDOR Refinery GHG Inventory 2024 group 5.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const handleDownloadWord = () => {
+    const link = document.createElement('a')
+    link.href = `${basePath}reports/MIDOR Refinery GHG Inventory 2024 word version.docx`
+    link.download = 'MIDOR Refinery GHG Inventory 2024 word version.docx'
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -48,20 +66,65 @@ export default function Dashboard() {
 
       {/* Header */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <div className="flex justify-between items-start mb-4">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-4 mb-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-800 mb-2">MIDOR GHG Inventory</h1>
             <p className="text-gray-600">Interview Quick Reference Tool</p>
           </div>
-          <button
-            onClick={handleDownload}
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            Download Excel
-          </button>
+
+          {/* Download Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+            {/* Excel Download */}
+            <button
+              onClick={handleDownloadExcel}
+              className="flex items-center gap-3 px-5 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all hover:shadow-lg group"
+            >
+              <svg className="w-8 h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM9.5 17.5l-2-2.5 2-2.5h1.5l-2 2.5 2 2.5H9.5zm3.5 0L11.5 15l1.5-2.5h1.5L13 15l1.5 2.5H13zm2-11V3.5L18.5 8H15z"/>
+              </svg>
+              <div className="text-left">
+                <div className="font-semibold text-sm">Download Excel</div>
+                <div className="text-xs opacity-80">Full calculations & data</div>
+              </div>
+              <svg className="w-5 h-5 ml-auto opacity-60 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </button>
+
+            {/* PDF Download */}
+            <button
+              onClick={handleDownloadPDF}
+              className="flex items-center gap-3 px-5 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all hover:shadow-lg group"
+            >
+              <svg className="w-8 h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM10.5 17H9v-4h1.5c1.1 0 2 .9 2 2s-.9 2-2 2zm-.5-1h.5c.55 0 1-.45 1-1s-.45-1-1-1H10v2zm4 1h-1v-4h1c1.65 0 3 1.35 3 3s-1.35 3-3 3v-2zm0-2h.5c.55 0 1-.45 1-1s-.45-1-1-1H14v2zM14 3.5L18.5 8H15V3.5z"/>
+              </svg>
+              <div className="text-left">
+                <div className="font-semibold text-sm">Download PDF</div>
+                <div className="text-xs opacity-80">Complete inventory report</div>
+              </div>
+              <svg className="w-5 h-5 ml-auto opacity-60 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </button>
+
+            {/* Word Download */}
+            <button
+              onClick={handleDownloadWord}
+              className="flex items-center gap-3 px-5 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all hover:shadow-lg group"
+            >
+              <svg className="w-8 h-8 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM15.5 17h-1l-1-3.5-1 3.5h-1l-1.5-5h1.2l.8 3.5 1-3.5h1l1 3.5.8-3.5h1.2l-1.5 5zM14 8V3.5L18.5 8H14z"/>
+              </svg>
+              <div className="text-left">
+                <div className="font-semibold text-sm">Download Word</div>
+                <div className="text-xs opacity-80">Editable report format</div>
+              </div>
+              <svg className="w-5 h-5 ml-auto opacity-60 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Search */}
