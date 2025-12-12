@@ -37,8 +37,9 @@ export default function LandingPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
       ),
-      link: null,
-      enabled: false,
+      link: 'https://app.powerbi.com/view?r=eyJrIjoiNzc2MDMxMWUtY2Y0OC00ZWRiLWE5YmQtZjg3MWQ1MzI1NzM4IiwidCI6ImVhZjYyNGM4LWEwYzQtNDE5NS04N2QyLTQ0M2U1ZDc1MTZjZCIsImMiOjh9&pageName=c863e79afdfd05419fbe',
+      enabled: true,
+      external: true,
       color: 'yellow'
     }
   ]
@@ -57,10 +58,10 @@ export default function LandingPage() {
       title: 'text-green-800'
     },
     yellow: {
-      bg: 'bg-gray-50',
-      border: 'border-gray-300',
-      icon: 'text-gray-400',
-      title: 'text-gray-500'
+      bg: 'bg-yellow-50 hover:bg-yellow-100',
+      border: 'border-yellow-500',
+      icon: 'text-yellow-600',
+      title: 'text-yellow-800'
     }
   }
 
@@ -79,6 +80,30 @@ export default function LandingPage() {
             const colors = colorClasses[card.color]
 
             if (card.enabled) {
+              if (card.external) {
+                return (
+                  <a
+                    key={card.id}
+                    href={card.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block rounded-xl shadow-lg p-8 border-l-4 transition-all duration-200 transform hover:scale-105 ${colors.bg} ${colors.border}`}
+                  >
+                    <div className={`mb-4 ${colors.icon}`}>
+                      {card.icon}
+                    </div>
+                    <h2 className={`text-2xl font-bold mb-3 ${colors.title}`}>
+                      {card.title}
+                    </h2>
+                    <p className="text-gray-600">
+                      {card.description}
+                    </p>
+                    <div className="mt-4 text-sm font-medium text-blue-600">
+                      Open in new tab →
+                    </div>
+                  </a>
+                )
+              }
               return (
                 <Link
                   key={card.id}
